@@ -27,8 +27,9 @@ const User = module.exports = mongoose.model("angularRegistration", UserSchema);
 
 
 
-module.exports.getUserById = function(id, callback) {
-    User.findById(id, callback)
+module.exports.getUserByemail = function(callback) {
+    console.log(callback)
+    User.find(callback)
 }
 
 module.exports.getUserByUsername = function(username, callback) {

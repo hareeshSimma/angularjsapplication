@@ -1,43 +1,29 @@
+         <div  ng-include="'views/header.html'" ></div>
 
-      <div  ng-include="'views/header.html'" ></div>
-       <table class="table">
-    <thead>
+       <table class="table table-bordered" style="margin-top: 92px;">
+    <thead style="color:red">
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
+        <th>UserName
+            <input type="text" class="form-control" ng-model="name"></th>
+        <th>Email Id</th>
+        <th>Mobile Number</th>
+                <th>Preview</th>
+                <th>Edit</th>
+        <th>Delete</th>
+
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td>Default</td>
-        <td>Defaultson</td>
-        <td>def@somemail.com</td>
-      </tr>      
-      <tr class="success">
-        <td>Success</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
+    <tbody style="color: lime; cursor: pointer;">
+      <tr ng-repeat="emp in users | filter:name">
+        <td>{{emp.username }}</td>
+        <td>{{emp.email}}</td>
+        <td>{{emp.mobileno}}</td>
+        <td><i class="fa fa-eye fa-2x" aria-hidden="true"></i></td>
+        <td><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></td>
+
+       <td><i class="fa fa-trash fa-2x" aria-hidden="true"></i></td>
+
       </tr>
-      <tr class="danger">
-        <td>Danger</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr class="info">
-        <td>Info</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
-      <tr class="warning">
-        <td>Warning</td>
-        <td>Refs</td>
-        <td>bo@example.com</td>
-      </tr>
-      <tr class="active">
-        <td>Active</td>
-        <td>Activeson</td>
-        <td>act@example.com</td>
-      </tr>
+      
     </tbody>
   </table>

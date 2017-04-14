@@ -1,7 +1,8 @@
-app.controller("loginCtrl",function($scope,$location,signup,login){
+app.controller("loginCtrl",function($scope,$location,myService){
     $scope.user = {};
    $scope.signup = function(user){
-    signup.signup(user).then(function(success){
+       myService.url='users/register';
+    myService.postService(user).then(function(success){
       console.log(success.data);
       if(success.data.message == "Usermail already exists try with another"){
         console.log("username already exists");
@@ -21,8 +22,9 @@ app.controller("loginCtrl",function($scope,$location,signup,login){
   
 
   $scope.login = function(data){
+       myService.url='users/authenticate';
   		console.log(data);
-  		login.login(data).then(function(success){
+  		myService.postService(data).then(function(success){
   	        console.log(success);
   		$scope.user = success.data;
 //        $localStorage.user = {

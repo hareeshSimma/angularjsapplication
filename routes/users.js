@@ -95,4 +95,23 @@ console.log(req.body)
     });
 });
 
+router.get('/emplist', (req, res, next) => {
+
+    User.getUserByemail((err, data) => {
+        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@")
+        console.log(data)
+        if (err) {
+            res.json({ success: false, msg: 'Not get any users' });
+        } else {
+
+            res.json({ success: true, msg: 'User found Successfully', data: data })
+        }
+
+    });
+
+
+
+});
+
+
 module.exports = router;

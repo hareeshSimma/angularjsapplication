@@ -15,7 +15,7 @@ app.config( function($routeProvider,$locationProvider){
     })
     .when("/employees", {
         templateUrl : "views/employees.html",
-//        controller : "homeCtrl"
+        controller : "empCtrl"
     })
     .when("/contactus", {
         templateUrl : "views/contactus.html",

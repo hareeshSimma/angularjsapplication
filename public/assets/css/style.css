@@ -218,7 +218,7 @@ border: none;
   background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
   background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }
-/*//contactu module*/
+/*contactu module*/
 
 /* generic  */
 
@@ -231,13 +231,13 @@ body {
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block }
 
-@font-face {
+/*@font-face {
     font-family: 'IconicStroke';
     src: url('http://www.onextrapixel.com/examples/html5-css3-contact-form/font/iconic_stroke-webfont.eot');
     src: url('http://www.onextrapixel.com/examples/html5-css3-contact-form/font/iconic_stroke-webfont.eot?#iefix') format('embedded-opentype'), url('http://www.onextrapixel.com/examples/html5-css3-contact-form/font/iconic_stroke-webfont.woff') format('woff'), url('http://www.onextrapixel.com/examples/html5-css3-contact-form/font/iconic_stroke-webfont.ttf') format('truetype'), url('http://www.onextrapixel.com/examples/html5-css3-contact-form/font/iconic_stroke-webfont.svg#IconicStrokeRegular') format('svg');
     font-weight: normal;
     font-style: normal;
-}
+}*/
 
 h1 {
     font-family: 'Questrial', Verdana, sans-serif;
