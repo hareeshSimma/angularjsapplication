@@ -1,27 +1,28 @@
-         <div  ng-include="'views/header.html'" ></div>
-
+        
+ <div  ng-include="'views/header.html'" ></div>
+ 
        <table class="table table-bordered" style="margin-top: 92px;">
     <thead style="color:red">
       <tr>
-        <th>UserName
-            <input type="text" class="form-control" ng-model="name"></th>
+        <th>UserName<span> <input type="text" class="form-control" ng-model="name"></span>
+        </th>
         <th>Email Id</th>
         <th>Mobile Number</th>
-                <th>Preview</th>
-                <th>Edit</th>
+        <th>Preview</th>
+        <th>Edit</th>
         <th>Delete</th>
 
       </tr>
     </thead>
     <tbody style="color: lime; cursor: pointer;">
-      <tr ng-repeat="emp in users | filter:name">
+      <tr ng-repeat="emp in users | filter:{username:name}">
         <td>{{emp.username }}</td>
         <td>{{emp.email}}</td>
         <td>{{emp.mobileno}}</td>
-        <td><i class="fa fa-eye fa-2x" aria-hidden="true"></i></td>
-        <td><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></td>
+        <td ng-click="isPreview(emp)"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></td>
+        <td ng-click="isEdit(emp)"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></td>
 
-       <td><i class="fa fa-trash fa-2x" aria-hidden="true"></i></td>
+       <td ng-click="isRemove(emp)"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></td>
 
       </tr>
       

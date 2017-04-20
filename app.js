@@ -43,6 +43,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/*', function (req, res) {
     res.sendFile(__dirname + '/public/index.html'); // uncommented, since it didn't work
 });
+
+
 // index route
 app.get('/', (req, res) => {
     res.send('hello world')
@@ -51,4 +53,7 @@ app.get('/', (req, res) => {
 // start server
 app.listen(port, function() {
     console.log('server is running at ' + port);
+    
+    
+    
 })

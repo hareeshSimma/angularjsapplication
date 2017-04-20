@@ -28,8 +28,8 @@ const User = module.exports = mongoose.model("angularRegistration", UserSchema);
 
 
 module.exports.getUserByemail = function(callback) {
-    console.log(callback)
-    User.find(callback)
+    
+    User.find(callback);
 }
 
 module.exports.getUserByUsername = function(username, callback) {
@@ -37,10 +37,18 @@ module.exports.getUserByUsername = function(username, callback) {
     User.findOne(query, callback);
 }
 
+module.exports.getUserById = function(_id, callback) {
+    var query = { _id: _id }
+   
+    User.findOne(query, callback);
+//    console.log(query)
+}
+
+
 module.exports.addUser = function(newuser, callback) {
 
     bcrypt.genSalt(15, (err, salt) => {
-//      console.log("##################$$$$$$$$$$$$$$$$$$")  
+ 
         bcrypt.hash(newuser.password, salt, (err, hash) => {
             if (err) {
                  console.log('err');
@@ -49,7 +57,7 @@ module.exports.addUser = function(newuser, callback) {
             newuser.password = hash;
             console.log(newuser);
             newuser.save(callback);
-            console.log(callback);
+//            console.log(callback);
         });
     });
 }
@@ -69,13 +77,13 @@ module.exports.getEmailAlert = function(email, callback) {
 }
 
 module.exports.setpswd = function(newuser, callback) {
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@")
+//    console.log("@@@@@@@@@@@@@@@@@@@@@@@")
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newuser.password, salt, (err, hash) => {
             newuser.password = hash;
             callback();
 
-            console.log(hash)
+//            console.log(hash)
 
 
         });

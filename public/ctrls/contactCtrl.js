@@ -1,3 +1,4 @@
-app.controller("homeCtrl",function($scope){
+
+app.controller("contactCtrl",function($scope){
      $scope.user=JSON.parse(localStorage.getItem('user'));
 })

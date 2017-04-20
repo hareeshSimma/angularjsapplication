@@ -3,13 +3,20 @@ app.controller("loginCtrl",function($scope,$location,myService){
    $scope.signup = function(user){
        myService.url='users/register';
     myService.postService(user).then(function(success){
-      console.log(success.data);
+//      console.log(success.data);
       if(success.data.message == "Usermail already exists try with another"){
         console.log("username already exists");
       }
       else{
-          console.log('register successfully...')
-        $location.path("/");
+//          console.log(success.data.success );
+          
+          if(success.data.success == true){
+           window.location.reload()
+            swal("User Registered Successfully");
+             
+            console.log('register successfully...');
+        }
+         
       }
     },
       function(error){
@@ -21,18 +28,21 @@ app.controller("loginCtrl",function($scope,$location,myService){
   //login module
   
 
-  $scope.login = function(data){
+       $scope.login = function(data){
        myService.url='users/authenticate';
-  		console.log(data);
+//  		console.log(data);
   		myService.postService(data).then(function(success){
-  	        console.log(success);
+//  	        console.log(success);
   		$scope.user = success.data;
-//        $localStorage.user = {
-//          username : success.data.username
-//        }
+
       console.log(success.data);
         if(success.data.success == true){
-            $location.path('/home');
+            myService.storeUserData(success.data.token, success.data.user);
+           
+           
+   var name=$scope.user.username;
+             
+            $location.path('/employees');
             swal("logged in successfully");
             
         }
@@ -43,7 +53,7 @@ app.controller("loginCtrl",function($scope,$location,myService){
   			}
   		)
   }
-
+ 
 
     
 })

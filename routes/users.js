@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const User = require('../models/user');
@@ -21,6 +22,7 @@ router.post('/register', (req, res, next) => {
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,
+      
         mobileno: mob
        
       
@@ -32,7 +34,7 @@ router.post('/register', (req, res, next) => {
 //            res.json({ success: false, msg: 'Failed to register user' });
        throw err;
         } else {
-console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 
             const mobileno = req.body.mobile;
             var accountSid = 'AC5096603a6381e71df49a65ff7a57c02c';
@@ -66,7 +68,7 @@ console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 router.post('/authenticate', (req, res, next) => {
     const username = req.body.uname;
     const password = req.body.pswd;
-console.log(req.body)
+   console.log(req.body)
     User.getUserByUsername(username, (err, user) => {
         if (err) throw err;
         if (!user) {
@@ -83,9 +85,9 @@ console.log(req.body)
                     token: 'JWT ' + token,
                     user: {
                         id: user._id,
-                        username: user.uname,
-                        
-                        email: user.email
+                        username: user.username,
+                        email: user.email,
+                        mobileno:user.mobileno
                     }
                 });
             } else {
@@ -94,7 +96,7 @@ console.log(req.body)
         })
     });
 });
-
+//get employee list
 router.get('/emplist', (req, res, next) => {
 
     User.getUserByemail((err, data) => {
@@ -112,6 +114,75 @@ router.get('/emplist', (req, res, next) => {
 
 
 });
+//Update emp detials
+    router.post('/updateemp/:id',(req,res,next)=>{
+//   console.log(req.params.id)
+    var newuser = new User({
+        username: req.body.username,
+        email: req.body.email,
+        mobileno: req.body.mobileno
+    
+    });
+    console.log(newuser)
+    console.log(newuser._id)
+    User.update({ _id:req.params.id }, { $set: { username:newuser.username,email:newuser.email,mobileno:newuser.mobileno } },function(err,docs){
+        if(err){
+            throw err;
+        }
+        else{
+            res.json({ success: true, msg: 'updated successfully' });
+        }
+    })
+    
+})//router
 
+//delete emp
+  router.post('/removeemp/:id',(req,res,next)=>{
+    User.remove({ _id:req.params.id },function(err,docs){
+        if(err){
+            throw err;
+        }
+        else{
+            res.json({ success: true, msg: 'Deleted successfully' });
+        }
+    })
+    
+})
+
+//change password
+router.post('/changepswd/:id',(req,res,next)=>{
+    const oldpassword = req.body.oldpswd;
+    const newpassword = req.body.pswd;
+    const confirmpassword = req.body.newconpswd;
+    User.getUserById(req.params.id, (err, user) => {
+        console.log(oldpassword)
+        if (err) throw err;
+        if (!user) {
+            return res.json({ success: false, msg: 'User Not Found' });
+        }
+        
+        User.comparePassword(oldpassword, user.password, (err, isMatch) => {
+            if (err) throw err;
+            if (isMatch) {
+                
+                if(newpassword==confirmpassword){
+                    console.log("passwor correct")
+                    
+                }else{
+                    res.json("password not matched...")
+                }
+                
+                res.json({
+                    success: true, msg:"correct" });
+            } else {
+                return res.json({ success: false, msg: 'Wrong Password' });
+            }
+        })
+    
+    
+    })
+   
+    
+})
 
 module.exports = router;

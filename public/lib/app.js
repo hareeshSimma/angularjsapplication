@@ -19,7 +19,7 @@ app.config( function($routeProvider,$locationProvider){
     })
     .when("/contactus", {
         templateUrl : "views/contactus.html",
-//        controller : "homeCtrl"
+        controller : "contactCtrl"
     })
     .otherwise({
         redirectTo: '/'
@@ -27,3 +27,12 @@ app.config( function($routeProvider,$locationProvider){
     
 
 });
+//app.controller('mainCtrl', function($scope,myService,$location){
+//    console.log("main controller");
+//    $scope.user=JSON.parse(localStorage.getItem('user'));
+//    $scope.isLogout=function(){
+//     myService.logout();
+//     $location.path('/');
+//     swal("logout successfull...")
+//    }
+//})

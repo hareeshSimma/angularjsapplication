@@ -52,33 +52,27 @@ app.factory('myService',function($http,$q){
     )
     return defered.promise;
     }
+    
+     object.storeUserData = function(token, user){
+        console.log("hai from service");
+        localStorage.setItem('id_token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+        var authToken = token;
+         var user = user;
+         console.log(user)
+     }
+     object.logout = function(){
+        var authToken=null;
+    var user=null;
+     localStorage.clear()
+     }
+    
+    
+    
     return object;
     
 })
 
 
 
-////login
-//    app.factory('login',function($http,$q){
-//            var object = {};
-//
-//    object.login = function(data){
-//        var defered = $q.defer();
-//    $http({
-//        url : 'users/authenticate',
-//        method : 'POST',
-//        data : data,
-//        
-//    }).then(function(success){
-//        defered.resolve(success);
-//        // console.log(success);
-//    },
-//        function(error){
-//            // console.log(error);
-//            defered.reject(error);
-//        }
-//    )
-//    return defered.promise;
-//    }
-//    return object;
-//})
+
