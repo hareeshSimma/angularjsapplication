@@ -1,10 +1,10 @@
-app.controller('mainCtrl', function($scope,myService,$location,$modal,$rootScope){
+app.controller('mainCtrl', function($scope,myService,$location,$modal,$rootScope,Data){
     console.log("main controller");
     $scope.user = {};
     $rootScope.user = JSON.parse(localStorage.getItem('user'));
 //    Data.setUser($scope.user);
 //    
-//    console.log(Data.getUser());
+  //console.log("dddd->",Data.getUser());
     $scope.isLogout=function(){
      myService.logout();
      $location.path('/');
@@ -15,9 +15,10 @@ app.controller('mainCtrl', function($scope,myService,$location,$modal,$rootScope
     $scope.isChangepassword=function(){
         $modal.open({
         templateUrl: 'views/changepswdModal.html',
-        controller:function($scope,$modalInstance){
+        controller:function($scope,$modalInstance,$timeout){
         
             $scope.UpdatePassword=function(user){
+                 $timeout(function(){
                $scope.modaldata = $rootScope.user; 
                console.log($scope.modaldata)
                 var id= $scope.modaldata.id;
@@ -28,9 +29,7 @@ app.controller('mainCtrl', function($scope,myService,$location,$modal,$rootScope
         console.log("password not updated");
       }
       else{
-//          console.log(success.data.success );
-          
-          if(success.data.success == true){
+     if(success.data.success == true){
         
             swal("password updated Successfully");
              
@@ -43,6 +42,8 @@ app.controller('mainCtrl', function($scope,myService,$location,$modal,$rootScope
         console.log(error);
       }
     )
+      $modalInstance.close();
+                 },1000)
                     
                 }
             
@@ -64,14 +65,12 @@ app.controller('mainCtrl', function($scope,myService,$location,$modal,$rootScope
     
     //my profile
     $scope.isProfile=function(){
-       console.log("-->",$scope.user);
+     
          $modal.open({
          templateUrl: 'views/profileModal.html',
          controller:function($scope,$modalInstance){
            $scope.modaldata = $rootScope.user;
-          console.log("user $$$$$$$$$$$$$$$$");
-             console.log( $scope.modaldata);
-             
+            
             $scope.close=function(){
           $modalInstance.close();
         } 

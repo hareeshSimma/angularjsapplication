@@ -1,4 +1,4 @@
-app.controller("loginCtrl",function($scope,$location,myService){
+app.controller("loginCtrl",function($scope,$location,myService,Data){
     $scope.user = {};
    $scope.signup = function(user){
        myService.url='users/register';
@@ -37,6 +37,12 @@ app.controller("loginCtrl",function($scope,$location,myService){
 
       console.log(success.data);
         if(success.data.success == true){
+            
+            var userData = {
+                "id_token":success.data.token,
+                "user":success.data.user
+            };
+            Data.setUser(userData);
             myService.storeUserData(success.data.token, success.data.user);
            
            

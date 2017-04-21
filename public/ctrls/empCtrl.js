@@ -6,7 +6,7 @@ app.controller("empCtrl",function($scope,myService,$modal,$location){
     myService.getService().then(function(success){
   	$scope.users = success.data.data;
 //        console.log("@@@@@@@@@@@@@@@@@@@@@")
-  	console.log($scope.users);
+//  	console.log($scope.users);
   },
   	function(error){
   		console.log(error);

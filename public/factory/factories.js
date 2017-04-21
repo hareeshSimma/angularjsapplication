@@ -32,7 +32,7 @@ app.factory('myService',function($http,$q){
     
     object.getService = function(data){
        
-        console.log(data);
+       
         var defered = $q.defer();
         var reqObj = 
                 {
@@ -57,13 +57,13 @@ app.factory('myService',function($http,$q){
         console.log("hai from service");
         localStorage.setItem('id_token', token);
         localStorage.setItem('user', JSON.stringify(user));
-        var authToken = token;
-         var user = user;
-         console.log(user)
+//        var authToken = token;
+//         var user = user;
+//         console.log(user)
      }
      object.logout = function(){
-        var authToken=null;
-    var user=null;
+//        var authToken = null;
+//    var user = null;
      localStorage.clear()
      }
     

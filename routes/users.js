@@ -152,8 +152,15 @@ router.get('/emplist', (req, res, next) => {
 //change password
 router.post('/changepswd/:id',(req,res,next)=>{
     const oldpassword = req.body.oldpswd;
-    const newpassword = req.body.pswd;
-    const confirmpassword = req.body.newconpswd;
+    const newpassword = req.body.npswd;
+//    const confirmpassword = req.body.newconpswd;
+    
+//     var newuser = new User({
+//            oldpassword: req.body.oldpswd,
+//            newpassword: req.body.npswd,
+//            confirmpassword: req.body.newconpswd
+//        });
+    
     User.getUserById(req.params.id, (err, user) => {
         console.log(oldpassword)
         if (err) throw err;
@@ -164,16 +171,29 @@ router.post('/changepswd/:id',(req,res,next)=>{
         User.comparePassword(oldpassword, user.password, (err, isMatch) => {
             if (err) throw err;
             if (isMatch) {
-                
-                if(newpassword==confirmpassword){
+                console.log(oldpassword)
+                if(req.body.npswd==req.body.newconpswd){
                     console.log("passwor correct")
-                    
+                     User.setpswd(req.params.id,newpassword, (err, data) => {
+                     
+                          //console.log(data)
+              if (err) {
+                res.json({ success: false, msg: 'User not updated' });
+                 } else {
+                   res.json({ success: true, msg: 'password updated Successfully' });
+                        }
+
+                   
+                     })
+             
                 }else{
-                    res.json("password not matched...")
+                     console.log("passwor wrong")
+                    res.json({
+                    success: true, msg:"Password not matched..." })
+                    
                 }
                 
-                res.json({
-                    success: true, msg:"correct" });
+
             } else {
                 return res.json({ success: false, msg: 'Wrong Password' });
             }

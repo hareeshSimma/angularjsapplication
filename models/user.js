@@ -75,14 +75,15 @@ module.exports.getEmailAlert = function(email, callback) {
     console.log(query)
 
 }
-
-module.exports.setpswd = function(newuser, callback) {
-//    console.log("@@@@@@@@@@@@@@@@@@@@@@@")
+//change password
+module.exports.setpswd = function(id,newpassword, callback) {
+    console.log("@@@@@@@@@@@@@@@@@@@@@@@")
+//    console.log(newpassword)
     bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newuser.password, salt, (err, hash) => {
-            newuser.password = hash;
-            callback();
-
+        bcrypt.hash(newpassword, salt, (err, hash) => {
+           newpassword = hash;
+           User.update({ _id:id }, { $set: { password: hash} },callback);
+            
 //            console.log(hash)
 
 
